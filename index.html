@@ -1,0 +1,1008 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Portfolio" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/fa62c117c7.js" crossorigin="anonymous"></script>
+    <title>Rajat Rayaraddi</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        border: 0;
+        outline: 0;
+        background-color: inherit;
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        box-shadow: none;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        line-height: 1.5;
+        color: var(--clr-fg);
+        background-color: var(--clr-bg);
+        overflow-x: hidden;
+      }
+
+      .light {
+        --clr-bg: #fcfcfc;
+        --clr-bg-alt: #fff;
+        --clr-fg: #555;
+        --clr-fg-alt: #444;
+        --clr-primary: #2978b5;
+        --clr-accent: #ff6b6b;
+        --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      }
+
+      .dark {
+        --clr-bg: #1a1a2e;
+        --clr-bg-alt: #16213e;
+        --clr-fg: #eaeaea;
+        --clr-fg-alt: #fff;
+        --clr-primary: #0f3460;
+        --clr-accent: #e94560;
+        --shadow: rgba(0, 0, 0, 0.5) 0px 10px 36px 0px;
+      }
+
+      /* Animated Background */
+      .animated-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.05;
+      }
+
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: var(--clr-primary);
+        animation: float 20s infinite;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0) translateX(0); }
+        25% { transform: translateY(-100px) translateX(50px); }
+        50% { transform: translateY(-50px) translateX(-50px); }
+        75% { transform: translateY(-150px) translateX(100px); }
+      }
+
+      h1, h2, h3, h4 {
+        line-height: 1.2;
+        color: var(--clr-fg-alt);
+      }
+
+      h1 { font-size: 4rem; }
+      h2 { font-size: 2rem; }
+      h3 { font-size: 1.5rem; }
+      h4 { font-size: 1.3rem; }
+
+      ul { list-style-type: none; }
+      a { text-decoration: none; }
+      button { cursor: pointer; }
+
+      /* Header Styles */
+      .header {
+        height: 8em;
+        max-width: 1100px;
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        background-color: var(--clr-bg);
+        z-index: 100;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+      }
+
+      .header.scrolled {
+        box-shadow: var(--shadow);
+        height: 6em;
+      }
+
+      .link {
+        color: var(--clr-primary);
+        padding: 0 0 0.3em 0;
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .link::before {
+        content: "";
+        display: inline;
+        width: 0%;
+        height: 0.2em;
+        position: absolute;
+        bottom: 0;
+        background-color: var(--clr-primary);
+        transition: width 0.3s ease;
+      }
+
+      .link:hover::before { width: 100%; }
+
+      .link--nav {
+        color: var(--clr-fg);
+        text-transform: lowercase;
+        font-weight: 500;
+      }
+
+      .link--icon {
+        color: var(--clr-fg);
+        font-size: 2.0rem;
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+
+      .link--icon:hover {
+        transform: translateY(-5px) scale(1.1);
+        color: var(--clr-primary);
+      }
+
+      .nav__list {
+        margin-right: 1.5em;
+        display: flex;
+      }
+
+      .nav__list-item { margin-left: 1.5em; }
+
+      .btn {
+        display: block;
+        padding: 0.8em 1.4em;
+        font-weight: 500;
+        font-size: 0.9rem;
+        text-transform: lowercase;
+        transition: all 0.3s ease;
+      }
+
+      .btn--outline {
+        color: var(--clr-primary);
+        border: 2px solid var(--clr-primary);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .btn--outline::before {
+        content: "";
+        position: absolute;
+        background-color: var(--clr-primary);
+        right: 100%;
+        bottom: 0;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        transition: right 0.3s ease;
+      }
+
+      .btn--outline:hover::before { right: 0; }
+      .btn--outline:hover { color: var(--clr-bg); }
+
+      .btn--plain {
+        text-transform: initial;
+        background-color: var(--clr-bg-alt);
+        box-shadow: var(--shadow);
+        border: 0;
+      }
+
+      .btn--plain:hover {
+        transform: translateY(-4px);
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 15px;
+      }
+
+      .btn--icon {
+        padding: 0;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+      }
+
+      .btn--icon:hover { color: var(--clr-primary); transform: rotate(20deg); }
+
+      /* Main Layout */
+      main {
+        max-width: 1100px;
+        width: 95%;
+        margin: 0 auto;
+      }
+
+      .section {
+        margin-top: 5em;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .section:nth-child(2) { animation-delay: 0.1s; }
+      .section:nth-child(3) { animation-delay: 0.2s; }
+      .section:nth-child(4) { animation-delay: 0.3s; }
+      .section:nth-child(5) { animation-delay: 0.4s; }
+      .section:nth-child(6) { animation-delay: 0.5s; }
+
+      .section__title {
+        text-align: center;
+        margin-bottom: 1em;
+        text-transform: uppercase;
+        position: relative;
+        display: inline-block;
+        width: 100%;
+      }
+
+      .section__title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+        border-radius: 2px;
+      }
+
+      /* About Section */
+      .about {
+        flex-direction: column;
+        margin-top: 3em;
+        text-align: center;
+        display: flex;
+        align-items: center;
+      }
+
+      .about__name {
+        color: var(--clr-primary);
+        animation: gradient 3s ease infinite;
+        background: linear-gradient(45deg, var(--clr-primary), var(--clr-accent), var(--clr-primary));
+        background-size: 200% 200%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      @keyframes gradient {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+      }
+
+      .about__role {
+        margin-top: 1.2em;
+        font-size: 1.3rem;
+      }
+
+      .about__contact {
+        margin-top: 2.4em;
+        display: flex;
+        gap: 1em;
+        align-items: center;
+      }
+
+      /* Projects Grid */
+      .projects__grid {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
+        grid-gap: 2em;
+      }
+
+      .project, .education, .experience {
+        padding: 2em;
+        margin: 0 auto;
+        text-align: center;
+        box-shadow: var(--shadow);
+        transition: all 0.4s ease;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+        background: var(--clr-bg-alt);
+      }
+
+      .project::before, .education::before, .experience::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .project:hover::before, .education:hover::before, .experience:hover::before {
+        left: 100%;
+      }
+
+      .project:hover, .education:hover, .experience:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 15px 40px;
+      }
+
+      .project__description {
+        margin-top: 1em;
+        text-align: justify;
+      }
+
+      .project__stack {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 1.2em 0;
+        gap: 0.5em;
+      }
+
+      .project__stack-item {
+        font-weight: 500;
+        font-size: 0.8rem;
+        color: var(--clr-fg-alt);
+        padding: 0.4em 0.8em;
+        background: var(--clr-bg);
+        border-radius: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .project__stack-item:hover {
+        background: var(--clr-primary);
+        color: var(--clr-bg);
+        transform: scale(1.1);
+      }
+
+      /* Skills List */
+      .skills__list {
+        max-width: 600px;
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.8em;
+      }
+
+      .skills__list-item {
+        transition: all 0.3s ease;
+        border-radius: 8px;
+      }
+
+      .skills__list-item:hover {
+        background: var(--clr-primary) !important;
+        color: var(--clr-bg) !important;
+      }
+
+      /* Contact Section */
+      .contact {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+      }
+
+      /* Footer */
+      .footer {
+        padding: 3em 0;
+        margin-top: 4em;
+        text-align: center;
+        border-top: 1px solid var(--clr-fg);
+        opacity: 0.7;
+      }
+
+      /* Scroll to Top */
+      .scroll-top {
+        display: none;
+        position: fixed;
+        bottom: 2em;
+        right: 2em;
+        background-color: var(--clr-primary);
+        color: var(--clr-bg);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        box-shadow: var(--shadow);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        cursor: pointer;
+      }
+
+      .scroll-top:hover {
+        transform: translateY(-5px);
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 10px 30px;
+      }
+
+      .nav__hamburger {
+        display: none;
+      }
+
+      /* Typing Animation */
+      .typing-text::after {
+        content: '|';
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 900px) {
+        h1 { font-size: 2.6rem; }
+      }
+
+      @media (max-width: 600px) {
+        .header { height: 6em; }
+        .section { margin-top: 4em; }
+        
+        .nav__list {
+          flex-direction: column;
+          padding: 4em 0;
+          position: absolute;
+          right: 0;
+          left: 0;
+          top: 5em;
+          background-color: var(--clr-bg);
+          width: 0;
+          overflow: hidden;
+          transition: width 0.3s ease;
+          box-shadow: var(--shadow);
+        }
+
+        .display-nav-list { width: 100%; }
+        .nav__list-item { margin: 0.5em 0; }
+        
+        .nav__hamburger {
+          display: flex;
+          margin-left: 0.8em;
+        }
+
+        .about {
+          align-items: flex-start;
+          margin-top: 2em;
+        }
+      }
+
+      /* Progress Bar */
+      .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--clr-primary), var(--clr-accent));
+        z-index: 9999;
+        transition: width 0.1s ease;
+      }
+    </style>
+  </head>
+  <body class="light" id="top">
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Animated Background -->
+    <div class="animated-bg" id="animatedBg"></div>
+
+    <header class="header" id="header">
+      <h3>
+        <a href="https://rajatrayaraddi.github.io/" class="link">Rajat Rayaraddi.</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          <li class="nav__list-item">
+            <a class="link link--nav" href="#education">Education</a>
+          </li>
+          <li class="nav__list-item">
+            <a class="link link--nav" href="#experience">Experience</a>
+          </li>
+          <li class="nav__list-item">
+            <a class="link link--nav" href="#skills">Skills</a>
+          </li>
+          <li class="nav__list-item">
+            <a class="link link--nav" href="#projects">Projects</a>
+          </li>
+          <li class="nav__list-item">
+            <a class="link link--nav" href="#certifications">Certifications</a>
+          </li>
+          <li class="nav__list-item">
+            <a class="link link--nav" href="#contact">Contact</a>
+          </li>
+        </ul>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button type="button" aria-label="toggle navigation" class="btn btn--icon nav__hamburger">
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- About -->
+      <div class="about center">
+        <h1><span class="about__name">Rajat Rayaraddi.</span></h1>
+        <h2 class="about__role typing-text">M.S. in Computer Science at The George Washington University</h2>
+        <br>
+        <div class="about__contact center">
+          <a href="https://github.com/rajatrayaraddi" aria-label="github" class="link link--icon">
+            <i aria-hidden="true" class="fab fa-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/rajatrayaraddi" aria-label="linkedin" class="link link--icon">
+            <i aria-hidden="true" class="fab fa-linkedin"></i>
+          </a>
+          <a href="https://medium.com/@rajatrayaraddi" aria-label="medium" class="link link--icon">
+            <i aria-hidden="true" class="fab fa-medium"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <section id="education" class="section projects">
+        <h2 class="section__title">Education</h2>
+        <div class="projects__grid">
+          <div class="education">
+            <h3>The George Washington University</h3>
+            <p class="project__description">
+              <b>Master of Science in Computer Science</b><br>
+            </p>
+            <p style="margin-top: 8px;">
+              August 2024 - May 2026<br>
+              Washington, D.C.
+            </p>
+          </div>
+          <div class="education">
+            <h3>PES University</h3>
+            <p class="project__description">
+              <b>Bachelor of Technology in Computer Science and Engineering</b><br>
+            </p>
+            <p style="margin-top: 8px;">
+              December 2020 - May 2024<br>
+              Bangalore, India
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section id="experience" class="section projects">
+        <h2 class="section__title">Experience</h2>
+        <div class="projects__grid">
+          <div class="experience">
+            <h3>Research Assistant</h3>
+            <h4>PES University</h4>
+            <p class="project__description">
+              Trained and developed a Vision-Language Model to generate metaphorical interpretations from images, combining CNNs for image feature extraction and Transformer-based NLP models, integrating both visual and textual feature representations to analyze visual metaphors for multimodal metaphor detection.
+            </p>
+            <p style="margin-top: 8px;">
+              June 2023 - August 2023<br>
+              Bangalore, India
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills -->
+      <section class="section skills" id="skills">
+        <h2 class="section__title">Skills</h2>
+        <ul class="skills__list">
+          <li class="skills__list-item btn btn--plain">Python</li>
+          <li class="skills__list-item btn btn--plain">R</li>
+          <li class="skills__list-item btn btn--plain">SQL</li>
+          <li class="skills__list-item btn btn--plain">NumPy</li>
+          <li class="skills__list-item btn btn--plain">Pandas</li>
+          <li class="skills__list-item btn btn--plain">Matplotlib</li>
+          <li class="skills__list-item btn btn--plain">Seaborn</li>
+          <li class="skills__list-item btn btn--plain">Plotly</li>
+          <li class="skills__list-item btn btn--plain">scikit-learn</li>
+          <li class="skills__list-item btn btn--plain">TensorFlow</li>
+          <li class="skills__list-item btn btn--plain">PyTorch</li>
+          <li class="skills__list-item btn btn--plain">Keras</li>
+          <li class="skills__list-item btn btn--plain">XGBoost</li>
+          <li class="skills__list-item btn btn--plain">LightGBM</li>
+          <li class="skills__list-item btn btn--plain">Apache Spark</li>
+          <li class="skills__list-item btn btn--plain">Airflow</li>
+          <li class="skills__list-item btn btn--plain">Kafka</li>
+          <li class="skills__list-item btn btn--plain">Tableau</li>
+          <li class="skills__list-item btn btn--plain">Power BI</li>
+          <li class="skills__list-item btn btn--plain">PostgreSQL</li>
+          <li class="skills__list-item btn btn--plain">MongoDB</li>
+          <li class="skills__list-item btn btn--plain">MySQL</li>
+        </ul>
+      </section>
+      
+      <!-- Projects -->
+      <section id="projects" class="section projects">
+        <h2 class="section__title">Projects</h2>
+        <div class="projects__grid">
+          <div class="project">
+            <h3>BiLSTM-CNN With Attention For RUL Prediction</h3>
+            <p class="project__description">
+              Created a hybrid deep learning model combining BiLSTM, Transformer, and CNN architectures to estimate Remaining Useful Life (RUL) of aircraft engines using NASA C-MAPSS dataset. Incorporated CBAM attention to enhance focus on key sensor features.
+            </p>
+            <ul class="project__stack">
+              <li class="project__stack-item">TensorFlow</li>
+              <li class="project__stack-item">scikit-learn</li>
+            </ul>
+            <a href="https://github.com/rajatrayaraddi/rul-prediction-bilstm-cnn/tree/main" aria-label="source code" class="link link--icon">
+              <i aria-hidden="true" class="fab fa-github"></i>
+            </a>
+            <a href="https://doi.org/10.5281/zenodo.17102955" aria-label="live preview" class="link link--icon">
+              <i aria-hidden="true" class="fas fa-book"></i>
+            </a>
+          </div>
+          
+          <div class="project">
+            <h3>Anomaly Detection in Surveillance Videos</h3>
+            <p class="project__description">
+              A novel Multiple Instance Learning (MIL) based model architecture to classify surveillance video segments. Achieved an AUC of 0.9022, outperforming state-of-the-art models on UCF-Crime dataset by 2%.
+            </p>
+            <ul class="project__stack">
+              <li class="project__stack-item">PyTorch</li>
+            </ul>
+            <a href="https://github.com/rajatrayaraddi/multiple-instance-learning" aria-label="source code" class="link link--icon">
+              <i aria-hidden="true" class="fab fa-github"></i>
+            </a>
+            <a href="https://medium.com/@rajatrayaraddi/multiple-instance-learning-for-detecting-crowd-behavior-anomalies-in-surveillance-videos-e51858a462bf" aria-label="medium" class="link link--icon">
+              <i aria-hidden="true" class="fab fa-medium"></i>
+            </a>
+          </div>
+
+          <div class="project">
+            <h3>AI-Powered Diagnostic Support Tool</h3>
+            <p class="project__description">
+              Retrieval-Augmented Generation (RAG) based diagnostic support tool using PubMed data and OpenAI API to suggest possible diseases based on patient symptoms, demographics, and medical history.
+            </p>
+            <ul class="project__stack">
+              <li class="project__stack-item">Node.js</li>
+              <li class="project__stack-item">React</li>
+            </ul>
+            <a href="https://github.com/shrnik/medimate" aria-label="source code" class="link link--icon">
+              <i aria-hidden="true" class="fab fa-github"></i>
+            </a>
+            <a href="https://medium.com/@rajatrayaraddi/rag-based-medical-diagnostic-support-tool-1b57167c5089" aria-label="medium" class="link link--icon">
+              <i aria-hidden="true" class="fab fa-medium"></i>
+            </a>
+          </div>
+
+          <div class="project">
+            <h3>Vehicle Detection and Classification</h3>
+            <p class="project__description">
+              SSD-Mobilenet V1-based traffic monitoring system to detect, count, and classify vehicles in real-time. Implemented vehicle color and speed prediction with automated logging.
+            </p>
+            <ul class="project__stack">
+              <li class="project__stack-item">TensorFlow</li>
+              <li class="project__stack-item">OpenCV</li>
+            </ul>
+            <a href="https://github.com/rajatrayaraddi/vehicle-detection-classification" aria-label="source code" class="link link--icon">
+              <i aria-hidden="true" class="fab fa-github"></i>
+            </a>
+          </div>
+
+          <div class="project">
+            <h3>Churn Prediction with Ensemble Learning</h3>
+            <p class="project__description">
+              Built and evaluated multiple machine learning models to predict customer churn. Benchmarked classifiers including Logistic Regression, SVM, Random Forest, and Gradient Boosting.
+            </p>
+            <ul class="project__stack">
+              <li class="project__stack-item">pandas</li>
+              <li class="project__stack-item">scikit-learn</li>
+            </ul>
+            <a href="https://github.com/rajatrayaraddi/churn-prediction" aria-label="source code" class="link link--icon">
+              <i aria-hidden="true" class="fab fa-github"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Certifications -->
+      <section id="certifications" class="section certifications">
+        <h2 class="section__title">Certifications</h2>
+        <div class="projects__grid">
+          <div class="project">
+            <h3>AWS Certified AI Practitioner</h3>
+            <a href="https://www.credly.com/badges/4a53c6ab-e5b8-4404-9b84-8a9c1d5ce827/public_url" target="_blank">
+              <img src="https://images.credly.com/size/680x680/images/4d4693bb-530e-4bca-9327-de07f3aa2348/image.png" alt="AWS AI Practitioner" width="150" style="margin-top: 10px; border-radius: 8px;" />
+            </a>
+            <p style="margin-top: 8px; font-size: 0.9rem;">
+              Issued: September 2025 | Expires: September 2028
+            </p>
+          </div>
+          <div class="project">
+            <h3>AWS Certified Cloud Practitioner</h3>
+            <a href="https://www.credly.com/badges/fd3a3a9a-e4c8-4d7c-a5a4-ed485e2626f5/public_url" target="_blank">
+              <img src="https://images.credly.com/size/680x680/images/00634f82-b07f-4bbd-a6bb-53de397fc3a6/image.png" alt="AWS Cloud Practitioner" width="150" style="margin-top: 10px; border-radius: 8px;" />
+            </a>
+            <p style="margin-top: 8px; font-size: 0.9rem;">
+              Issued: September 2025 | Expires: September 2028
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="section contact center" id="contact">
+        <h2 class="section__title">Contact</h2>
+        <a href="mailto:rajat.rayaraddi@gmail.com">
+          <span class="btn btn--outline">rajat.rayaraddi@gmail.com</span>
+        </a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <a href="https://github.com/rajatrayaraddi/rajatrayaraddi.github.io" class="link footer__link">
+        <p>&copy; 2025 Rajat Rayaraddi. All Rights Reserved.</p>
+      </a>
+    </footer>
+
+    <div class="scroll-top" id="scrollTop">
+      <i aria-hidden="true" class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+      const body = document.body;
+      const btnTheme = document.querySelector('.fa-moon');
+      const btnHamburger = document.querySelector('.fa-bars');
+      const header = document.getElementById('header');
+      const progressBar = document.getElementById('progressBar');
+      const scrollTop = document.getElementById('scrollTop');
+      const animatedBg = document.getElementById('animatedBg');
+
+      // Theme Management (in-memory)
+      let currentTheme = 'light';
+      let currentBtnTheme = 'fa-moon';
+
+      const setTheme = (bodyClass, btnClass) => {
+        body.classList.remove('light', 'dark');
+        btnTheme.classList.remove('fa-moon', 'fa-sun');
+        body.classList.add(bodyClass);
+        btnTheme.classList.add(btnClass);
+        currentTheme = bodyClass;
+        currentBtnTheme = btnClass;
+      };
+
+      const toggleTheme = () => {
+        if (currentTheme === 'dark') {
+          setTheme('light', 'fa-moon');
+        } else {
+          setTheme('dark', 'fa-sun');
+        }
+      };
+
+      btnTheme.addEventListener('click', toggleTheme);
+
+      // Hamburger Menu
+      const displayList = () => {
+        const navUl = document.querySelector('.nav__list');
+        if (btnHamburger.classList.contains('fa-bars')) {
+          btnHamburger.classList.remove('fa-bars');
+          btnHamburger.classList.add('fa-times');
+          navUl.classList.add('display-nav-list');
+        } else {
+          btnHamburger.classList.remove('fa-times');
+          btnHamburger.classList.add('fa-bars');
+          navUl.classList.remove('display-nav-list');
+        }
+      };
+
+      btnHamburger.addEventListener('click', displayList);
+
+      // Scroll Progress Bar
+      window.addEventListener('scroll', () => {
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.scrollY / scrollHeight) * 100;
+        progressBar.style.width = scrolled + '%';
+
+        // Header shadow on scroll
+        if (window.scrollY > 100) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+
+        // Scroll to top button
+        if (window.scrollY > 500) {
+          scrollTop.style.display = 'flex';
+        } else {
+          scrollTop.style.display = 'none';
+        }
+      });
+
+      // Scroll to top functionality
+      scrollTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Animated Background Particles
+      function createParticles() {
+        const particleCount = 15;
+        for (let i = 0; i < particleCount; i++) {
+          const particle = document.createElement('div');
+          particle.classList.add('particle');
+          
+          const size = Math.random() * 100 + 50;
+          particle.style.width = size + 'px';
+          particle.style.height = size + 'px';
+          particle.style.left = Math.random() * 100 + '%';
+          particle.style.top = Math.random() * 100 + '%';
+          particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+          particle.style.animationDelay = (Math.random() * 5) + 's';
+          
+          animatedBg.appendChild(particle);
+        }
+      }
+
+      createParticles();
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // Close mobile menu if open
+            const navUl = document.querySelector('.nav__list');
+            if (navUl.classList.contains('display-nav-list')) {
+              btnHamburger.classList.remove('fa-times');
+              btnHamburger.classList.add('fa-bars');
+              navUl.classList.remove('display-nav-list');
+            }
+          }
+        });
+      });
+
+      // Intersection Observer for fade-in animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.project, .education, .experience, .skills__list-item').forEach(el => {
+        observer.observe(el);
+      });
+
+      // Typing effect for role
+      const typingElement = document.querySelector('.typing-text');
+      if (typingElement) {
+        const text = typingElement.textContent;
+        typingElement.textContent = '';
+        let i = 0;
+        
+        function typeWriter() {
+          if (i < text.length) {
+            typingElement.textContent += text.charAt(i);
+            i++;
+            setTimeout(typeWriter, 50);
+          }
+        }
+        
+        setTimeout(typeWriter, 500);
+      }
+
+      // Add hover effect to project cards
+      document.querySelectorAll('.project, .education, .experience').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.borderLeft = '4px solid var(--clr-primary)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.borderLeft = 'none';
+        });
+      });
+
+      // Parallax effect for sections
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallaxElements = document.querySelectorAll('.section');
+        
+        parallaxElements.forEach((el, index) => {
+          const speed = 0.5;
+          const yPos = -(scrolled * speed * 0.1);
+          el.style.transform = `translateY(${yPos}px)`;
+        });
+      });
+
+      // Add ripple effect to buttons
+      document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('click', function(e) {
+          const ripple = document.createElement('span');
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+          
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = x + 'px';
+          ripple.style.top = y + 'px';
+          ripple.style.position = 'absolute';
+          ripple.style.borderRadius = '50%';
+          ripple.style.background = 'rgba(255, 255, 255, 0.5)';
+          ripple.style.transform = 'scale(0)';
+          ripple.style.animation = 'ripple 0.6s ease-out';
+          ripple.style.pointerEvents = 'none';
+          
+          this.style.position = 'relative';
+          this.style.overflow = 'hidden';
+          this.appendChild(ripple);
+          
+          setTimeout(() => ripple.remove(), 600);
+        });
+      });
+
+      // Add CSS for ripple animation dynamically
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes ripple {
+          to {
+            transform: scale(4);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Performance optimization: Debounce scroll events
+      function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      }
+
+      // Apply debounce to scroll handlers
+      const debouncedScroll = debounce(() => {
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.scrollY / scrollHeight) * 100;
+        progressBar.style.width = scrolled + '%';
+      }, 10);
+
+      window.addEventListener('scroll', debouncedScroll);
+
+      // Preload images for better performance
+      window.addEventListener('load', () => {
+        document.querySelectorAll('img').forEach(img => {
+          if (img.loading !== 'lazy') {
+            img.loading = 'lazy';
+          }
+        });
+      });
+
+      console.log('%c👋 Welcome to Rajat\'s Portfolio!', 'font-size: 20px; color: #2978b5; font-weight: bold;');
+      console.log('%cBuilt with ❤️ and modern web technologies', 'font-size: 14px; color: #666;');
+    </script>
+  </body>
+</html>
